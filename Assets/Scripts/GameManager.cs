@@ -4,28 +4,36 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 	bool GameEnded= false;
+	public float restartDelay = 2.2f;
+	public GameObject LevelUpSplash;
 
 	//game ending function
 	public void EndGame ()
 	{
 		if (GameEnded == false) 
 		{
-			Debug.Log ("Game over");
 			GameEnded = true;
-			Invoke("Restart", 3f);
+			Invoke("Restart", restartDelay);
 		}
 	}
-
+		
+	//restart the current level
 	void Restart()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
+	//load next level
 	public void LevelUp()
 	{
-		if (SceneManager.GetActiveScene ().buildIndex != 3) 
+		LevelUpSplash.SetActive(true);
+	}
+
+	void Update()
+	{
+		if(Input.GetKey(KeyCode.Escape))
 		{
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+			SceneManager.LoadScene("credits");
 		}
 	}
 }

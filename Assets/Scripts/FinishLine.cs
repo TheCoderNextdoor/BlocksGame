@@ -3,10 +3,12 @@
 public class FinishLine : MonoBehaviour {
 
 	public GameManager g1;
+	public PlayerMovement p1;
 
 	// Update is called once per frame
 	void OnTriggerEnter ()
 	{
-			g1.LevelUp ();
+		p1.StopPlayer ();
+		g1.LevelUp ();
 	}
 }
